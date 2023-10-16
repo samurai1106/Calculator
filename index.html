@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <!-- main css style file -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- webfonts css file -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <!-- google font Orbitron-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"> 
+    <!-- google font Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="calc-container">
+        <i class="fa-solid fa-lightbulb lamp"></i>
+        <div class="display">0</div>
+        <div class="btns-container">
+            <div data-clr="#03A9F4" id="delete" class="button blue">del</div>
+            <div data-clr="#F44336" id="clear" class="button red">C</div>
+            <div data-clr="#9C27B0" data-value="%" id= "operator" class="button purple">%</div>
+            <div data-clr="#FF5722" data-value="÷" id= "operator" class="button orange">÷</div>
+            <div data-clr="#FF5722" data-value="7" id="number" class="button orange">7</div>
+            <div data-clr="#CDDC39" data-value="8" id="number" class="button yellow">8</div>
+            <div data-clr="#03A9F4" data-value="9" id="number" class="button blue">9</div>
+            <div data-clr="#9C27B0" data-value="×" id= "operator" class="button purple">×</div>
+            <div data-clr="#9C27B0" data-value="4" id="number" class="button purple">4</div>
+            <div data-clr="#03A9F4" data-value="5" id="number" class="button blue">5</div>
+            <div data-clr="#F44336" data-value="6" id="number" class="button red">6</div>
+            <div data-clr="#FF5722" data-value="-" id= "operator" class="button orange">-</div>
+            <div data-clr="#4CAF50" data-value="1" id="number" class="button green">1</div>
+            <div data-clr="#FF5722" data-value="2" id="number" class="button orange">2</div>
+            <div data-clr="#03A9F4" data-value="3" id="number" class="button blue">3</div>
+            <div data-clr="#CDDC39" data-value="+" id= "operator" class="button yellow">+</div>
+            <div data-clr="#4CAF50" id="toggle-sign" class="button green">+/-</div>
+            <div data-clr="#CDDC39" data-value="0" id="number" class="button yellow">0</div>
+            <div data-clr="#9C27B0" data-value="." id="dot" class="button purple">.</div>
+            <div data-clr="#F44336" id= "result" class="button red">=</div>
+        </div>
+    </div>
+    <!-- the main js script -->
+    <script src="js/main.js"></script>
+</body>
+</html>

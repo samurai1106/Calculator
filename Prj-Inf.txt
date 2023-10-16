@@ -1,0 +1,30 @@
+# Colors to use:
+
+- Body color:
+    + Material black: #191919
+
+- Calculator color:
+    + Hard material black: #111111
+
+- Display color:
+    + Transparent
+    + border => gray: #
+
+
+- Buttons colors:
+    + Material red: #F44336
+    + Material green: #4CAF50
+    + Material blue: #03A9F4
+    + Material orange: #FF5722
+    + Material purple: #9C27B0
+    + Material yellow: #CDDC39
+
+# Size to use:
+
+- Width: 450px
+- Height: full body height
+
+# Font to use :
+
+- Roboto (for buttons)
+- Orbitron (for display)
