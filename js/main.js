@@ -18,6 +18,7 @@ let result = 0;
 let firstvalueTwin;
 let isFirstValue = true;
 let isSecondValue = false;
+let isFirstOperator = true;
 let isResult = false;
 let isPercentage = false;
 
@@ -118,6 +119,7 @@ function resetValues() { // Reseting all values
     sign = '';
     isFirstValue = true;
     isSecondValue = false;
+    isFirstOperator = true;
     isResult = false;
     isPercentage = false;
     result = 0;
@@ -148,7 +150,14 @@ operatorBtn.forEach((key) => { // Operators buttons configuration
     key.addEventListener('click', () => { // For each button apply the processe below when it's clicked
         if(firstvalue !== '') { // The operator button will work only if the first value is known
             getSign(key); // [1] Get operator
-            display.innerHTML = '0'; // [2] Reset screen output to '0'
+            // [2] Showing result after operator clicked
+            if(isFirstOperator === true) { 
+                display.innerHTML = firstvalue; 
+                isFirstOperator = false;
+            }
+            else {
+                display.innerHTML = result; 
+            }
             if(secondvalue !== '') { // [3] Check if it's not the first operation by checking second value, if the condition is true change first value to result value preparing for next operation
                 firstvalueTwin = firstvalue;
                 firstvalue = result;
