@@ -3,12 +3,13 @@ let display = document.querySelector('.display');
 let buttons = document.querySelectorAll('.button');
 let numBtns = document.querySelectorAll('#number');
 let operatorBtn = document.querySelectorAll('#operator');
+let DeleteBtn = document.querySelector('#delete');
 let clearAllBtn = document.querySelector('#clear');
+let percentageBtn = document.querySelector('#percentage');
 let dotBtn = document.querySelector('#dot');
 let toggleSignBtn = document.querySelector('#toggle-sign');
 let ParenthBtn = document.querySelector('#parenthesis');
 let resultBtn = document.querySelector('#result');
-let DeleteBtn = document.querySelector('#delete');
 
 let firstvalue = "";
 let secondvalue = "";
@@ -18,6 +19,28 @@ let firstvalueTwin;
 let isFirstValue = true;
 let isSecondValue = false;
 let isResult = false;
+let isPercentage = false;
+
+// Setting page lighting mode from local storage
+if(localStorage.getItem('Mode')) {
+    if(localStorage.getItem('Mode') === 'Light') {
+        document.body.style.backgroundColor = '#fff';
+        lamp.style.color = '#aea31c';
+        display.style.cssText = 'border: 1px solid rgb(255, 255, 255, .5); box-shadow: 0 0 0';
+        buttons.forEach((el) => {
+            el.style.cssText = 'box-shadow: 0 0 20px 5px rgb(0,0,0,.5) inset'
+        })
+    }
+    else {
+        document.body.style.backgroundColor = '#191919';
+        lamp.style.color = '#fff';
+        display.style.cssText = 'border: none; box-shadow: 0 0 10px rgb(255, 255, 255, .7) inset';
+        buttons.forEach((el) => {
+            el.style.cssText = `box-shadow: 0 0 13px ${el.dataset.clr}, 0 0 20px 5px rgb(0,0,0,.3) inset`
+        })
+    }
+}
+
 
 // The light bulb at the edge functionality
 lamp.onclick = function() {  
@@ -29,6 +52,8 @@ lamp.onclick = function() {
         buttons.forEach((el) => {
             el.style.cssText = 'box-shadow: 0 0 20px 5px rgb(0,0,0,.5) inset'
         })
+        // Adding local Storage
+        localStorage.setItem('Mode','Light');
     }
     else { // If the body doesn't contain the 'light-on' class do the same process backward
         document.body.style.backgroundColor = '#191919';
@@ -37,6 +62,8 @@ lamp.onclick = function() {
         buttons.forEach((el) => {
             el.style.cssText = `box-shadow: 0 0 13px ${el.dataset.clr}, 0 0 20px 5px rgb(0,0,0,.3) inset`
         })
+        // Adding local Storage
+        localStorage.setItem('Mode','Dark');
     }
 
 }
@@ -69,9 +96,6 @@ function getSecondValue(key) { // [3] Filling the first second with a lenght and
 
 function applyOperation() { // [4] Application of the operation with switch statement
     switch(sign) {
-        case '%':
-            result = +firstvalue % +secondvalue;
-            break;
         case '÷':
             result = +firstvalue / +secondvalue;
             break;
@@ -95,6 +119,7 @@ function resetValues() { // Reseting all values
     isFirstValue = true;
     isSecondValue = false;
     isResult = false;
+    isPercentage = false;
     result = 0;
 }
 
@@ -186,6 +211,22 @@ toggleSignBtn.onclick = function() { // Toggling sign button configuration
     else if(isFirstValue === true && display.innerHTML !== '0') { // When it's first value turn multiply the number by -1 to toggle it's sign
         firstvalue *= -1;
         display.innerHTML = firstvalue;
+    }
+}
+
+percentageBtn.onclick = function() { // Toggling sign button configuration
+    if(isResult === true) { // When it's result value turn multiply the number by 100 to get the percentage
+        // Toggling percentage with a condition statement
+        if(isPercentage !== true) {
+            result *= 100;
+            display.innerHTML = `${result}%`;
+            isPercentage = true;
+        }
+        else {
+            result /= 100;
+            display.innerHTML = result;
+            isPercentage = false;
+        }
     }
 }
 
