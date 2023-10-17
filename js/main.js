@@ -32,7 +32,7 @@ if(localStorage.getItem('Mode')) {
         lamp.style.color = '#aea31c';
         displayContainer.style.cssText = 'border: 1px solid rgb(255, 255, 255, .5); box-shadow: 0 0 0';
         buttons.forEach((el) => {
-            el.style.cssText = 'box-shadow: 0 0 20px 5px rgb(0,0,0,.5) inset'
+            el.style.cssText = 'box-shadow: 0 0 20px 5px rgb(0,0,0,.5) inset';
         })
     }
     else {
@@ -40,7 +40,7 @@ if(localStorage.getItem('Mode')) {
         lamp.style.color = '#fff';
         displayContainer.style.cssText = 'border: none; box-shadow: 0 0 10px rgb(255, 255, 255, .7) inset';
         buttons.forEach((el) => {
-            el.style.cssText = `box-shadow: 0 0 13px ${el.dataset.clr}, 0 0 20px 5px rgb(0,0,0,.3) inset`
+            el.style.cssText = `box-shadow: 0 0 13px ${el.dataset.clr}, 0 0 20px 5px rgb(0,0,0,.3) inset`;
         })
     }
 }
@@ -54,7 +54,7 @@ lamp.onclick = function() {
         lamp.style.color = '#aea31c';
         displayContainer.style.cssText = 'border: 1px solid rgb(255, 255, 255, .5); box-shadow: 0 0 0';
         buttons.forEach((el) => {
-            el.style.cssText = 'box-shadow: 0 0 20px 5px rgb(0,0,0,.5) inset'
+            el.style.cssText = 'box-shadow: 0 0 20px 5px rgb(0,0,0,.5) inset';
         })
         // Adding local Storage
         localStorage.setItem('Mode','Light');
@@ -64,7 +64,7 @@ lamp.onclick = function() {
         lamp.style.color = '#fff';
         displayContainer.style.cssText = 'border: none; box-shadow: 0 0 10px rgb(255, 255, 255, .7) inset';
         buttons.forEach((el) => {
-            el.style.cssText = `box-shadow: 0 0 13px ${el.dataset.clr}, 0 0 20px 5px rgb(0,0,0,.3) inset`
+            el.style.cssText = `box-shadow: 0 0 13px ${el.dataset.clr}, 0 0 20px 5px rgb(0,0,0,.3) inset`;
         })
         // Adding local Storage
         localStorage.setItem('Mode','Dark');
@@ -224,7 +224,7 @@ toggleSignBtn.onclick = function() { // Toggling sign button configuration
         if(isFirstOpToggle === true) {
             secondvalue = firstvalue * -1
             display.innerHTML = secondvalue;
-            isFirstOpToggle = false
+            isFirstOpToggle = false;
         }
         else {
             result *= -1;
