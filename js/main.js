@@ -1,5 +1,7 @@
 let lamp = document.querySelector('.lamp');
+let displayContainer = document.querySelector('.display-container');
 let display = document.querySelector('.display');
+let littleDisplay = document.querySelector('.little-display');
 let buttons = document.querySelectorAll('.button');
 let numBtns = document.querySelectorAll('#number');
 let operatorBtn = document.querySelectorAll('#operator');
@@ -20,6 +22,7 @@ let isFirstValue = true;
 let isSecondValue = false;
 let isFirstOperator = true;
 let isResult = false;
+let isFirstOpToggle = true;
 let isPercentage = false;
 
 // Setting page lighting mode from local storage
@@ -27,7 +30,7 @@ if(localStorage.getItem('Mode')) {
     if(localStorage.getItem('Mode') === 'Light') {
         document.body.style.backgroundColor = '#fff';
         lamp.style.color = '#aea31c';
-        display.style.cssText = 'border: 1px solid rgb(255, 255, 255, .5); box-shadow: 0 0 0';
+        displayContainer.style.cssText = 'border: 1px solid rgb(255, 255, 255, .5); box-shadow: 0 0 0';
         buttons.forEach((el) => {
             el.style.cssText = 'box-shadow: 0 0 20px 5px rgb(0,0,0,.5) inset'
         })
@@ -35,7 +38,7 @@ if(localStorage.getItem('Mode')) {
     else {
         document.body.style.backgroundColor = '#191919';
         lamp.style.color = '#fff';
-        display.style.cssText = 'border: none; box-shadow: 0 0 10px rgb(255, 255, 255, .7) inset';
+        displayContainer.style.cssText = 'border: none; box-shadow: 0 0 10px rgb(255, 255, 255, .7) inset';
         buttons.forEach((el) => {
             el.style.cssText = `box-shadow: 0 0 13px ${el.dataset.clr}, 0 0 20px 5px rgb(0,0,0,.3) inset`
         })
@@ -49,7 +52,7 @@ lamp.onclick = function() {
     if(document.body.classList.contains('light-on')) { // If the body contains the 'light-on' class switch body's, lamp's and calculator's both screen and buttons color and shadow
         document.body.style.backgroundColor = '#fff';
         lamp.style.color = '#aea31c';
-        display.style.cssText = 'border: 1px solid rgb(255, 255, 255, .5); box-shadow: 0 0 0';
+        displayContainer.style.cssText = 'border: 1px solid rgb(255, 255, 255, .5); box-shadow: 0 0 0';
         buttons.forEach((el) => {
             el.style.cssText = 'box-shadow: 0 0 20px 5px rgb(0,0,0,.5) inset'
         })
@@ -59,7 +62,7 @@ lamp.onclick = function() {
     else { // If the body doesn't contain the 'light-on' class do the same process backward
         document.body.style.backgroundColor = '#191919';
         lamp.style.color = '#fff';
-        display.style.cssText = 'border: none; box-shadow: 0 0 10px rgb(255, 255, 255, .7) inset';
+        displayContainer.style.cssText = 'border: none; box-shadow: 0 0 10px rgb(255, 255, 255, .7) inset';
         buttons.forEach((el) => {
             el.style.cssText = `box-shadow: 0 0 13px ${el.dataset.clr}, 0 0 20px 5px rgb(0,0,0,.3) inset`
         })
@@ -122,7 +125,9 @@ function resetValues() { // Reseting all values
     isFirstOperator = true;
     isResult = false;
     isPercentage = false;
+    isFirstOpToggle = true;
     result = 0;
+    littleDisplay.innerHTML = '';
 }
 
 // --------- Buttons functionality section --------- 
@@ -152,10 +157,12 @@ operatorBtn.forEach((key) => { // Operators buttons configuration
             getSign(key); // [1] Get operator
             // [2] Showing result after operator clicked
             if(isFirstOperator === true) { 
+                littleDisplay.innerHTML = `${firstvalue} ${sign}`;
                 display.innerHTML = firstvalue; 
                 isFirstOperator = false;
             }
             else {
+                littleDisplay.innerHTML = `${result} ${sign}`;
                 display.innerHTML = result; 
             }
             if(secondvalue !== '') { // [3] Check if it's not the first operation by checking second value, if the condition is true change first value to result value preparing for next operation
@@ -175,6 +182,7 @@ resultBtn.onclick = function() { // Result button configuration
     if(firstvalue === result || secondvalue !== '') { // Show result output if last operation is done (first value is equal to result value from sign button function) or if the second value is known
         display.innerHTML = result;
         isResult = true;
+        littleDisplay.innerHTML = '';
     }
 }
 
@@ -211,6 +219,18 @@ toggleSignBtn.onclick = function() { // Toggling sign button configuration
     if(isResult === true) { // When it's result value turn multiply the number by -1 to toggle it's sign
         result *= -1;
         display.innerHTML = result;
+    }
+    else if ((display.innerHTML === result.toString() || isFirstOpToggle === true) ) {
+        if(isFirstOpToggle === true) {
+            secondvalue = firstvalue * -1
+            display.innerHTML = secondvalue;
+            isFirstOpToggle = false
+        }
+        else {
+            result *= -1;
+            display.innerHTML = result;
+            littleDisplay.innerHTML = result;
+        }
     }
     else if(firstvalue !== '' && sign !== '' && display.innerHTML !== '0') { // When it's second value turn multiply the number by -1 to toggle it's sign
         secondvalue *= -1;
